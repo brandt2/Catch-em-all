@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // test if ball can be drawn
   let test = new Ball(
-    { pos: [50, 50], radius: 50, color: "#00FF00"}
+    { pos: [50, 50], radius: 10, color: "#00FF00"}
   );
   test.draw(ctx);
 
