@@ -27,29 +27,36 @@ class Ball {
   };
 
   move() {
+    // allows ball to bounce off walls on left/right side
     if (this.pos[0] + this.radius > Game.width) {
       BALL_SPEEDX *= -1;
     } else if (this.pos[0] - this.radius < 0) {
       BALL_SPEEDX *= -1;
     }
-    this.pos[0] += BALL_SPEEDX;
 
-    if (this.pos[1] + this.radius > Game.height) {
+    // allows ball to bounce off top
+    if (this.pos[1] < 0) {
+      BALL_SPEEDY *= -1;
+    }
+
+    // checks if the is above the paddle
+    if (this.pos[1] + this.radius >= this.paddle.paddleHeight && this.pos[1] <= this.paddle.paddleHeight + 10) { 
       // checks if the ball is within the paddle
       if (this.pos[0] > this.paddle.paddleX && this.pos[0] < this.paddle.paddleX + this.paddle.paddleWidth){
         BALL_SPEEDY *= -1;
 
         let deltaPosX = this.pos[0] - (this.paddle.paddleX + this.paddle.paddleWidth/2);
-        BALL_SPEEDX = deltaPosX * 0.2;
-
-      } else {
-        this.ballReset();
-
+        BALL_SPEEDX = deltaPosX * 0.35;
       }
-
-    } else if ( this.pos[1] - this.radius < 0 ) {
-      BALL_SPEEDY *= -1;
     }
+    
+    // resets the ball position if ball position is greater than the game height
+    if (this.pos[1] + this.radius > Game.height) {
+      this.ballReset();
+    }
+
+    // allows the ball to move
+    this.pos[0] += BALL_SPEEDX;
     this.pos[1] += BALL_SPEEDY;
   }
 
