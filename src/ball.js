@@ -40,13 +40,15 @@ class Ball {
     }
 
     // checks if the is above the paddle
-    if (this.pos[1] + this.radius >= this.paddle.paddleHeight && this.pos[1] <= this.paddle.paddleHeight + 10) { 
-      // checks if the ball is within the paddle
-      if (this.pos[0] > this.paddle.paddleX && this.pos[0] < this.paddle.paddleX + this.paddle.paddleWidth){
-        BALL_SPEEDY *= -1;
-
-        let deltaPosX = this.pos[0] - (this.paddle.paddleX + this.paddle.paddleWidth/2);
-        BALL_SPEEDX = deltaPosX * 0.35;
+    if (BALL_SPEEDY > 0.0) {
+      if (this.pos[1] + this.radius >= this.paddle.paddleHeight && this.pos[1] <= this.paddle.paddleHeight + 10) { 
+        // checks if the ball is within the paddle
+        if (this.pos[0] > this.paddle.paddleX && this.pos[0] < this.paddle.paddleX + this.paddle.paddleWidth){
+          BALL_SPEEDY *= -1;
+  
+          let deltaPosX = this.pos[0] - (this.paddle.paddleX + this.paddle.paddleWidth/2);
+          BALL_SPEEDX = deltaPosX * 0.35;
+        }
       }
     }
     
