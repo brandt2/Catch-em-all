@@ -1,6 +1,6 @@
 const Game = require("./game");
 
-let BALL_SPEEDX = 4;
+let BALL_SPEEDX = 2;
 
 class Ball {
   constructor(params){
@@ -26,7 +26,9 @@ class Ball {
   };
 
   move() {
-    if (this.pos[0] > Game.width) {
+    if (this.pos[0] + this.radius > Game.width) {
+      BALL_SPEEDX *= -1;
+    } else if (this.pos[0] - this.radius < 0) {
       BALL_SPEEDX *= -1;
     }
     this.pos[0] += BALL_SPEEDX;
