@@ -1,16 +1,17 @@
 const Game = require("./game");
 
-let BALL_SPEEDX = 4;
+let BALL_SPEEDX = 1;
 let BALL_SPEEDY = 6;
 
 class Ball {
   constructor(params){
     this.pos = params.pos,
     this.radius = params.radius,
-    this.color = params.color
+    this.color = params.color,
+    this.paddle = params.paddle
   }
 
-  draw(ctx) {
+  drawBall(ctx) {
     ctx.fillStyle = this.color;
 
     ctx.beginPath();
@@ -26,18 +27,44 @@ class Ball {
   };
 
   move() {
+    // allows ball to bounce off walls on left/right side
     if (this.pos[0] + this.radius > Game.width) {
       BALL_SPEEDX *= -1;
     } else if (this.pos[0] - this.radius < 0) {
       BALL_SPEEDX *= -1;
     }
-    this.pos[0] += BALL_SPEEDX;
-    if (this.pos[1] + this.radius > Game.height) {
-      BALL_SPEEDY *= -1;
-    } else if ( this.pos[1] - this.radius < 0 ) {
+
+    // allows ball to bounce off top
+    if (this.pos[1] < 0) {
       BALL_SPEEDY *= -1;
     }
+
+    // checks if the is above the paddle
+    if (BALL_SPEEDY > 0.0) {
+      if (this.pos[1] + this.radius >= this.paddle.paddleHeight && this.pos[1] <= this.paddle.paddleHeight + 10) { 
+        // checks if the ball is within the paddle
+        if (this.pos[0] > this.paddle.paddleX && this.pos[0] < this.paddle.paddleX + this.paddle.paddleWidth){
+          BALL_SPEEDY *= -1;
+  
+          let deltaPosX = this.pos[0] - (this.paddle.paddleX + this.paddle.paddleWidth/2);
+          BALL_SPEEDX = deltaPosX * 0.35;
+        }
+      }
+    }
+    
+    // resets the ball position if ball position is greater than the game height
+    if (this.pos[1] + this.radius > Game.height) {
+      this.ballReset();
+    }
+
+    // allows the ball to move
+    this.pos[0] += BALL_SPEEDX;
     this.pos[1] += BALL_SPEEDY;
+  }
+
+  ballReset(){
+    this.pos[0] = Game.width/2;
+    this.pos[1] = Game.height/2;
   }
 
 }
