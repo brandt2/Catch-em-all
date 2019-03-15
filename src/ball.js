@@ -1,6 +1,6 @@
 const Game = require("./game");
 
-let BALL_SPEEDX = 4;
+let BALL_SPEEDX = 1;
 let BALL_SPEEDY = 6;
 
 class Ball {
@@ -38,6 +38,10 @@ class Ball {
       // checks if the ball is within the paddle
       if (this.pos[0] > this.paddle.paddleX && this.pos[0] < this.paddle.paddleX + this.paddle.paddleWidth){
         BALL_SPEEDY *= -1;
+
+        let deltaPosX = this.pos[0] - (this.paddle.paddleX + this.paddle.paddleWidth/2);
+        BALL_SPEEDX = deltaPosX * 0.2;
+
       } else {
         this.ballReset();
 
