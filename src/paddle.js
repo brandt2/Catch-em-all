@@ -12,12 +12,13 @@ class Paddle {
   }
 
   drawPaddle(ctx) {
-    ctx.fillstyle = this.color;
+    ctx.fillStyle = this.color;
+    // debugger
     ctx.fillRect(this.paddleX, this.paddleHeight, this.paddleWidth, this.paddleThickness);
   }
 
   setPaddlePos({ x, y }){
-    this.paddleX = x + 10;
+    this.paddleX = x - (this.paddleWidth/2);
   }
 
   mouseMoveHandler(evt){
