@@ -6,7 +6,6 @@ let BALL_SPEEDY = 6;
 class Ball {
   constructor(params){
     this.pos = params.pos,
-    // this.vel = params.vel,
     this.radius = params.radius,
     this.color = params.color
   }

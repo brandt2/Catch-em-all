@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const Game = __webpack_require__(/*! ./game */ \"./src/game.js\");\n\nlet BALL_SPEEDX = 4;\nlet BALL_SPEEDY = 6;\n\nclass Ball {\n  constructor(params){\n    this.pos = params.pos,\n    // this.vel = params.vel,\n    this.radius = params.radius,\n    this.color = params.color\n  }\n\n  draw(ctx) {\n    ctx.fillStyle = this.color;\n\n    ctx.beginPath();\n    ctx.arc(\n      this.pos[0],\n      this.pos[1],\n      this.radius,\n      0,\n      2 * Math.PI,\n      true\n    );\n    ctx.fill();\n  };\n\n  move() {\n    if (this.pos[0] + this.radius > Game.width) {\n      BALL_SPEEDX *= -1;\n    } else if (this.pos[0] - this.radius < 0) {\n      BALL_SPEEDX *= -1;\n    }\n    this.pos[0] += BALL_SPEEDX;\n    if (this.pos[1] + this.radius > Game.height) {\n      BALL_SPEEDY *= -1;\n    } else if ( this.pos[1] - this.radius < 0 ) {\n      BALL_SPEEDY *= -1;\n    }\n    this.pos[1] += BALL_SPEEDY;\n  }\n\n}\n\nmodule.exports = Ball;\n\n//# sourceURL=webpack:///./src/ball.js?");
+eval("const Game = __webpack_require__(/*! ./game */ \"./src/game.js\");\n\nlet BALL_SPEEDX = 4;\nlet BALL_SPEEDY = 6;\n\nclass Ball {\n  constructor(params){\n    this.pos = params.pos,\n    this.radius = params.radius,\n    this.color = params.color\n  }\n\n  draw(ctx) {\n    ctx.fillStyle = this.color;\n\n    ctx.beginPath();\n    ctx.arc(\n      this.pos[0],\n      this.pos[1],\n      this.radius,\n      0,\n      2 * Math.PI,\n      true\n    );\n    ctx.fill();\n  };\n\n  move() {\n    if (this.pos[0] + this.radius > Game.width) {\n      BALL_SPEEDX *= -1;\n    } else if (this.pos[0] - this.radius < 0) {\n      BALL_SPEEDX *= -1;\n    }\n    this.pos[0] += BALL_SPEEDX;\n    if (this.pos[1] + this.radius > Game.height) {\n      BALL_SPEEDY *= -1;\n    } else if ( this.pos[1] - this.radius < 0 ) {\n      BALL_SPEEDY *= -1;\n    }\n    this.pos[1] += BALL_SPEEDY;\n  }\n\n}\n\nmodule.exports = Ball;\n\n//# sourceURL=webpack:///./src/ball.js?");
 
 /***/ }),
 
@@ -104,7 +104,7 @@ eval("const Game = __webpack_require__(/*! ./game */ \"./src/game.js\");\n\nlet 
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const Ball = __webpack_require__(/*! ./ball */ \"./src/ball.js\");\n\nclass Game {\n  constructor(canvas) {\n    this.canvas = canvas,\n    this.height = 800,\n    this.width = 600,\n    this.style = \"background: aqua\"\n    // document.body.appendChild(this.canvas)\n  }\n}\n\nGame.height = 800;\nGame.width = 600;\nmodule.exports = Game;\n\n//# sourceURL=webpack:///./src/game.js?");
+eval("const Ball = __webpack_require__(/*! ./ball */ \"./src/ball.js\");\n\nclass Game {\n  constructor(ctx, ball) {\n    this.ctx = ctx,\n    this.ball = ball\n    this.gameLoop = this.gameLoop.bind(this);\n  }\n\n  gameLoop() {\n    requestAnimationFrame(this.gameLoop);\n    this.ctx.clearRect(0, 0, Game.width, Game.height)\n    this.ball.draw(this.ctx);\n    this.ball.move(this.ctx);\n  }\n\n}\n\nGame.height = 800;\nGame.width = 600;\nGame.style = \"background: black\";\nmodule.exports = Game;\n\n//# sourceURL=webpack:///./src/game.js?");
 
 /***/ }),
 
@@ -115,7 +115,7 @@ eval("const Ball = __webpack_require__(/*! ./ball */ \"./src/ball.js\");\n\nclas
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const Ball = __webpack_require__(/*! ./ball */ \"./src/ball.js\");\nconst Game = __webpack_require__(/*! ./game */ \"./src/game.js\");\n\ndocument.addEventListener(\"DOMContentLoaded\", () => {\n  const canvasEl = document.getElementById(\"game-canvas\");\n  const ctx = canvasEl.getContext(\"2d\");\n  \n  let newGame = new Game(canvasEl);\n\n  canvasEl.width = newGame.width;\n  canvasEl.height = newGame.height;\n  canvasEl.style = newGame.style;\n\n  // test if ball can be drawn\n  let test = new Ball(\n    { pos: [50, 50], radius: 10, color: \"#00FF00\"}\n  );\n  test.draw(ctx);\n\n  // test if the ball can be moved\n  test.move();\n\n  test.draw(ctx);\n\n  // testing movement\n\n\n\n  function gameLoop () {\n    requestAnimationFrame(gameLoop);\n    ctx.clearRect(0, 0, canvasEl.width, canvasEl.height)\n    test.draw(ctx);\n    test.move(ctx);\n  }\n\n  gameLoop();\n\n  console.log(\"Webpack is working!\")\n})\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("const Ball = __webpack_require__(/*! ./ball */ \"./src/ball.js\");\nconst Game = __webpack_require__(/*! ./game */ \"./src/game.js\");\n\ndocument.addEventListener(\"DOMContentLoaded\", () => {\n  const canvasEl = document.getElementById(\"game-canvas\");\n  const ctx = canvasEl.getContext(\"2d\");\n  \n  canvasEl.width = Game.width;\n  canvasEl.height = Game.height;\n  canvasEl.style = Game.style;\n  \n  let ball = new Ball(\n    { pos: [50, 50], radius: 10, color: \"white\"}\n  );\n    \n  let newGame = new Game(ctx, ball);\n\n  newGame.gameLoop()\n\n  console.log(\"Webpack is working!\")\n})\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 
