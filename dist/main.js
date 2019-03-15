@@ -104,7 +104,7 @@ eval("const Game = __webpack_require__(/*! ./game */ \"./src/game.js\");\n\nlet 
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const Ball = __webpack_require__(/*! ./ball */ \"./src/ball.js\");\n\nclass Game {\n  constructor(ctx, ball, paddle) {\n    this.ctx = ctx,\n    this.ball = ball,\n    this.paddle = paddle\n\n    this.gameLoop = this.gameLoop.bind(this);\n  }\n\n  gameLoop() {\n    requestAnimationFrame(this.gameLoop);\n    this.ctx.clearRect(0, 0, Game.width, Game.height)\n    this.ball.drawBall(this.ctx);\n    this.ball.move(this.ctx);\n    this.paddle.drawPaddle(this.ctx);\n  }\n\n}\n\nGame.height = 600;\nGame.width = 800;\nGame.style = \"background: black\";\nmodule.exports = Game;\n\n//# sourceURL=webpack:///./src/game.js?");
+eval("const Ball = __webpack_require__(/*! ./ball */ \"./src/ball.js\");\n\nclass Game {\n  constructor(ctx, ball, paddle) {\n    this.ctx = ctx,\n    this.ball = ball,\n    this.paddle = paddle\n\n    this.gameLoop = this.gameLoop.bind(this);\n  }\n\n  gameLoop() {\n    requestAnimationFrame(this.gameLoop);\n    this.ctx.clearRect(0, 0, Game.width, Game.height)\n    this.ball.drawBall(this.ctx);\n    this.ball.move();\n    this.paddle.drawPaddle(this.ctx);\n  }\n\n}\n\nGame.height = 600;\nGame.width = 800;\nGame.style = \"background: black\";\nmodule.exports = Game;\n\n//# sourceURL=webpack:///./src/game.js?");
 
 /***/ }),
 
@@ -115,7 +115,7 @@ eval("const Ball = __webpack_require__(/*! ./ball */ \"./src/ball.js\");\n\nclas
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const Ball = __webpack_require__(/*! ./ball */ \"./src/ball.js\");\nconst Game = __webpack_require__(/*! ./game */ \"./src/game.js\");\nconst Paddle = __webpack_require__(/*! ./paddle */ \"./src/paddle.js\");\n\ndocument.addEventListener(\"DOMContentLoaded\", () => {\n  const canvasEl = document.getElementById(\"game-canvas\");\n  const ctx = canvasEl.getContext(\"2d\");\n  \n  canvasEl.width = Game.width;\n  canvasEl.height = Game.height;\n  canvasEl.style = Game.style;\n  \n  // new ball\n  let ball = new Ball(\n    { pos: [80, 300], radius: 10, color: \"white\"}\n  );\n\n  // new paddle\n  let paddle = new Paddle(\n    { color: \"white\" }\n  );\n    \n  let newGame = new Game(ctx, ball, paddle);\n\n  newGame.gameLoop()\n\n  console.log(\"Webpack is working!\")\n})\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("const Ball = __webpack_require__(/*! ./ball */ \"./src/ball.js\");\nconst Game = __webpack_require__(/*! ./game */ \"./src/game.js\");\nconst Paddle = __webpack_require__(/*! ./paddle */ \"./src/paddle.js\");\n\ndocument.addEventListener(\"DOMContentLoaded\", () => {\n  const canvasEl = document.getElementById(\"game-canvas\");\n  const ctx = canvasEl.getContext(\"2d\");\n  \n  canvasEl.width = Game.width;\n  canvasEl.height = Game.height;\n  canvasEl.style = Game.style;\n  \n  // new ball\n  let ball = new Ball(\n    { pos: [80, 300], radius: 10, color: \"white\"}\n  );\n\n  // new paddle\n  let paddle = new Paddle({\n    color: \"white\",\n    canvasEl\n    }\n  );\n    \n  let newGame = new Game(ctx, ball, paddle);\n  newGame.gameLoop()\n\n  console.log(\"Webpack is working!\")\n})\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 
@@ -126,7 +126,7 @@ eval("const Ball = __webpack_require__(/*! ./ball */ \"./src/ball.js\");\nconst 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("class Paddle {\n  constructor(params){\n    this.color = params.color\n  }\n\n  drawPaddle(ctx) {\n    ctx.fillstyle = this.color;\n    ctx.fillRect(400, 590, 100, 10);\n  }\n}\n\nmodule.exports = Paddle;\n\n//# sourceURL=webpack:///./src/paddle.js?");
+eval("class Paddle {\n  constructor(params){\n    this.color = params.color,\n    this.canvasEl = params.canvasEl,\n    this.paddleX = 400\n\n    this.mouseMoveHandler = this.mouseMoveHandler.bind(this);\n    this.canvasEl.addEventListener(\"mousemove\", this.mouseMoveHandler);\n  }\n\n  drawPaddle(ctx) {\n    ctx.fillstyle = this.color;\n    ctx.fillRect(this.paddleX, 590, 100, 10);\n  }\n\n  setPaddlePos({ x, y }){\n    this.paddleX = x;\n  }\n\n  mouseMoveHandler(evt){\n    let mousePos = this.calculateMousePos(evt);\n    this.setPaddlePos(mousePos);\n  }\n\n  removeHandler(){\n    this.canvasEl.removeEventListener(\"mousemove\", this.mouseMoveHandler)\n  }\n  \n  calculateMousePos(evt) {\n    let rect = this.canvasEl.getBoundingClientRect();\n    let root = document.documentElement;\n    var mouseX = evt.clientX - rect.left - root.scrollLeft;\n    var mouseY = evt.clientY - rect.top - root.scrollTop;\n    return {\n      x: mouseX,\n      y: mouseY\n    };\n  }\n\n}\n\n\nmodule.exports = Paddle;\n\n//# sourceURL=webpack:///./src/paddle.js?");
 
 /***/ })
 

@@ -16,12 +16,13 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   // new paddle
-  let paddle = new Paddle(
-    { color: "white" }
+  let paddle = new Paddle({
+    color: "white",
+    canvasEl
+    }
   );
     
   let newGame = new Game(ctx, ball, paddle);
-
   newGame.gameLoop()
 
   console.log("Webpack is working!")

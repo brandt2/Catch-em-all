@@ -13,7 +13,7 @@ class Game {
     requestAnimationFrame(this.gameLoop);
     this.ctx.clearRect(0, 0, Game.width, Game.height)
     this.ball.drawBall(this.ctx);
-    this.ball.move(this.ctx);
+    this.ball.move();
     this.paddle.drawPaddle(this.ctx);
   }
 
