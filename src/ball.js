@@ -10,7 +10,7 @@ class Ball {
     this.color = params.color
   }
 
-  draw(ctx) {
+  drawBall(ctx) {
     ctx.fillStyle = this.color;
 
     ctx.beginPath();

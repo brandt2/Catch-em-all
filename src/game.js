@@ -1,22 +1,25 @@
 const Ball = require("./ball");
 
 class Game {
-  constructor(ctx, ball) {
+  constructor(ctx, ball, paddle) {
     this.ctx = ctx,
-    this.ball = ball
+    this.ball = ball,
+    this.paddle = paddle
+
     this.gameLoop = this.gameLoop.bind(this);
   }
 
   gameLoop() {
     requestAnimationFrame(this.gameLoop);
     this.ctx.clearRect(0, 0, Game.width, Game.height)
-    this.ball.draw(this.ctx);
+    this.ball.drawBall(this.ctx);
     this.ball.move(this.ctx);
+    this.paddle.drawPaddle(this.ctx);
   }
 
 }
 
-Game.height = 800;
-Game.width = 600;
+Game.height = 600;
+Game.width = 800;
 Game.style = "background: black";
 module.exports = Game;
