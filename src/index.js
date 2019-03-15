@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // new paddle
   let paddle = new Paddle({
     color: "white",
-    canvasEl
+    canvasEl: canvasEl
     }
   );
     

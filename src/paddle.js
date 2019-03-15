@@ -2,7 +2,8 @@ class Paddle {
   constructor(params){
     this.color = params.color,
     this.canvasEl = params.canvasEl,
-    this.paddleX = 400
+    this.paddleX = 400,
+    this.paddleLength = 100;
 
     this.mouseMoveHandler = this.mouseMoveHandler.bind(this);
     this.canvasEl.addEventListener("mousemove", this.mouseMoveHandler);
@@ -10,11 +11,11 @@ class Paddle {
 
   drawPaddle(ctx) {
     ctx.fillstyle = this.color;
-    ctx.fillRect(this.paddleX, 590, 100, 10);
+    ctx.fillRect(this.paddleX, 590, this.paddleLength, 10);
   }
 
   setPaddlePos({ x, y }){
-    this.paddleX = x;
+    this.paddleX = x - (this.paddleLength/2);
   }
 
   mouseMoveHandler(evt){
