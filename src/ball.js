@@ -5,24 +5,17 @@ let BALL_SPEEDY = 6;
 
 class Ball {
   constructor(params){
-    this.pos = params.pos,
-    this.radius = params.radius,
-    this.color = params.color,
-    this.paddle = params.paddle
+    this.pos = params.pos;
+    this.radius = params.radius;
+    this.color = params.color;
+    this.paddle = params.paddle;
+    this.brick = params.brick;
   }
 
   drawBall(ctx) {
     ctx.fillStyle = this.color;
-
     ctx.beginPath();
-    ctx.arc(
-      this.pos[0],
-      this.pos[1],
-      this.radius,
-      0,
-      2 * Math.PI,
-      true
-    );
+    ctx.arc(this.pos[0], this.pos[1], this.radius, 0, 2 * Math.PI, true);
     ctx.fill();
   };
 
@@ -39,7 +32,7 @@ class Ball {
       BALL_SPEEDY *= -1;
     }
 
-    // checks if the is above the paddle
+    // checks if the ball is above the paddle
     if (BALL_SPEEDY > 0.0) {
       if (this.pos[1] + this.radius >= this.paddle.paddleHeight && this.pos[1] <= this.paddle.paddleHeight + 10) { 
         // checks if the ball is within the paddle
@@ -56,6 +49,10 @@ class Ball {
     if (this.pos[1] + this.radius > Game.height) {
       this.ballReset();
     }
+    
+    if (this.brick.checkForAndRemoveBrickAtPixelCoord(this.pos[0], this.pos[1])) {
+      BALL_SPEEDY *= -1;
+    };
 
     // allows the ball to move
     this.pos[0] += BALL_SPEEDX;
