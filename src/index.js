@@ -21,14 +21,13 @@ document.addEventListener("DOMContentLoaded", () => {
   let ball = new Ball({ 
     pos: [400, 300],
     radius: 10,
-    color: "pink",
+    color: "aqua",
     paddle: paddle
   });
 
   // new brick
-  let brick = new Brick({
-    ctx: ctx
-  })
+  let brick = new Brick();
+  brick.resetBricks();
     
   let newGame = new Game(ctx, ball, paddle, brick);
   newGame.gameLoop();
