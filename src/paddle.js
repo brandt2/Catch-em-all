@@ -13,7 +13,6 @@ class Paddle {
 
   drawPaddle(ctx) {
     ctx.fillStyle = this.color;
-    // debugger
     ctx.fillRect(this.paddleX, this.paddleHeight, this.paddleWidth, this.paddleThickness);
   }
 

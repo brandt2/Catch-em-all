@@ -25,11 +25,11 @@ class Brick {
       return false;
     }
 
-
     if (this.brickGrid[brickIndex] === 1) {
       this.brickGrid[brickIndex] = 0;
       return true;
     }
+
     return false;
   }
 
@@ -53,7 +53,7 @@ class Brick {
   // draw all the bricks by looping
   drawBricks(ctx) {
     for (let i = 0; i < this.brickCols; i++) {
-      for(let j = 0; j < this.brickRows; j++) {
+      for(let j = 1; j < this.brickRows; j++) {
         if (this.isBrickAtTileCoord(i, j)) {
           let brickLeftEdgeX = i * this.brickWidth;
           let brickTopEdgeY = j * this.brickThickness;
