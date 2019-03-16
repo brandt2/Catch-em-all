@@ -9,6 +9,23 @@ class Brick {
 
     this.drawBrick = this.drawBrick.bind(this);
     this.isBrickAtTileCoord = this.isBrickAtTileCoord.bind(this);
+    // this.brickTileToIndex = this.brickTileToIndex.bind(this);
+  }
+
+  brickTileToIndex(tileCol, tileRow){
+    return (tileCol + this.brickCols*tileRow)
+  }
+
+  removeBrickAtPixelCoord(pixelX, pixelY){
+    let tileCol = Math.floor(pixelX / this.brickWidth);
+    let tileRow = Math.floor(pixelY / this.brickThickness);
+
+    if (tileCol < 0 || tileCol >= this.brickCols || tileRow < 0 || tileRow >= this.brickRows) {
+      return;
+    }
+
+    let brickIndex = this.brickTileToIndex(tileCol, tileRow)
+    this.brickGrid[brickIndex] = 0;
   }
 
   isBrickAtTileCoord(brickTileCol, brickTileRow) {
@@ -18,11 +35,7 @@ class Brick {
 
   resetBricks() {
     for(var i = 0; i < this.brickCols * this.brickRows; i++) {
-      if(Math.random() < 0.5) {
-        this.brickGrid[i] = 1;
-      } else {
-        this.brickGrid[i] = 0;
-      }
+      this.brickGrid[i] = 1;
     }
   }
 

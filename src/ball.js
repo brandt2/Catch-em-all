@@ -5,10 +5,11 @@ let BALL_SPEEDY = 6;
 
 class Ball {
   constructor(params){
-    this.pos = params.pos,
-    this.radius = params.radius,
-    this.color = params.color,
-    this.paddle = params.paddle
+    this.pos = params.pos;
+    this.radius = params.radius;
+    this.color = params.color;
+    this.paddle = params.paddle;
+    this.brick = params.brick;
   }
 
   drawBall(ctx) {
@@ -52,6 +53,8 @@ class Ball {
       }
     }
     
+    this.brick.removeBrickAtPixelCoord(this.pos[0], this.pos[1]);
+
     // resets the ball position if ball position is greater than the game height
     if (this.pos[1] + this.radius > Game.height) {
       this.ballReset();

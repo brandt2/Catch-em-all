@@ -17,17 +17,19 @@ document.addEventListener("DOMContentLoaded", () => {
     canvasEl: canvasEl
   });
   
+  // new brick
+  let brick = new Brick();
+  brick.resetBricks();
+ 
   // new ball
   let ball = new Ball({ 
     pos: [400, 300],
     radius: 10,
     color: "aqua",
-    paddle: paddle
+    paddle: paddle,
+    brick: brick
   });
 
-  // new brick
-  let brick = new Brick();
-  brick.resetBricks();
     
   let newGame = new Game(ctx, ball, paddle, brick);
   newGame.gameLoop();
