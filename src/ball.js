@@ -53,7 +53,9 @@ class Ball {
       }
     }
     
-    this.brick.removeBrickAtPixelCoord(this.pos[0], this.pos[1]);
+    if (this.brick.checkForAndRemoveBrickAtPixelCoord(this.pos[0], this.pos[1])) {
+      BALL_SPEEDY *= -1;
+    };
 
     // resets the ball position if ball position is greater than the game height
     if (this.pos[1] + this.radius > Game.height) {

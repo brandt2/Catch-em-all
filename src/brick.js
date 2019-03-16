@@ -16,16 +16,21 @@ class Brick {
     return (tileCol + this.brickCols*tileRow)
   }
 
-  removeBrickAtPixelCoord(pixelX, pixelY){
+  checkForAndRemoveBrickAtPixelCoord(pixelX, pixelY){
     let tileCol = Math.floor(pixelX / this.brickWidth);
     let tileRow = Math.floor(pixelY / this.brickThickness);
+    let brickIndex = this.brickTileToIndex(tileCol, tileRow)
 
     if (tileCol < 0 || tileCol >= this.brickCols || tileRow < 0 || tileRow >= this.brickRows) {
-      return;
+      return false;
     }
 
-    let brickIndex = this.brickTileToIndex(tileCol, tileRow)
-    this.brickGrid[brickIndex] = 0;
+
+    if (this.brickGrid[brickIndex] === 1) {
+      this.brickGrid[brickIndex] = 0;
+      return true;
+    }
+    return false;
   }
 
   isBrickAtTileCoord(brickTileCol, brickTileRow) {
