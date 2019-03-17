@@ -30,9 +30,9 @@ document.addEventListener("DOMContentLoaded", () => {
     brick: brick
   });
 
-    
+  // new game
   let newGame = new Game(ctx, ball, paddle, brick);
-  newGame.gameLoop();
+  newGame.gameStart();
 
   console.log("Webpack is working!")
 })

@@ -11,15 +11,18 @@ class Paddle {
     this.canvasEl.addEventListener("mousemove", this.mouseMoveHandler);
   }
 
+  // draw the paddle
   drawPaddle(ctx) {
     ctx.fillStyle = this.color;
     ctx.fillRect(this.paddleX, this.paddleHeight, this.paddleWidth, this.paddleThickness);
   }
 
+  // set the paddle position
   setPaddlePos({ x, y }){
     this.paddleX = x - (this.paddleWidth/2);
   }
 
+  // checks the mouse position and updates it
   mouseMoveHandler(evt){
     let mousePos = this.calculateMousePos(evt);
     this.setPaddlePos(mousePos);
@@ -29,6 +32,7 @@ class Paddle {
     this.canvasEl.removeEventListener("mousemove", this.mouseMoveHandler)
   }
   
+  // calculates the mouse position
   calculateMousePos(evt) {
     let rect = this.canvasEl.getBoundingClientRect();
     let root = document.documentElement;
