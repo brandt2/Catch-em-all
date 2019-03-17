@@ -97,7 +97,7 @@ class Game {
 
 }
 
-Game.height = 600;
+Game.height = 720;
 Game.width = 800;
 Game.lives = 3;
 Game.style = "background: black";

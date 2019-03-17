@@ -6,6 +6,7 @@ const Brick = require("./brick");
 document.addEventListener("DOMContentLoaded", () => {
   const canvasEl = document.getElementById("game-canvas");
   const ctx = canvasEl.getContext("2d");
+  const pokemon = document.getElementById("pokemon");
   
   canvasEl.width = Game.width;
   canvasEl.height = Game.height;
@@ -18,12 +19,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   
   // new brick
-  let brick = new Brick();
+  let brick = new Brick(pokemon);
   brick.resetBricks();
  
   // new ball
   let ball = new Ball({ 
-    pos: [400, 300],
+    pos: [400, 400],
     radius: 10,
     color: "aqua",
     paddle: paddle,
