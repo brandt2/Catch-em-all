@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     
   let newGame = new Game(ctx, ball, paddle, brick);
-  newGame.gameLoop();
+  newGame.gameStart();
 
   console.log("Webpack is working!")
 })

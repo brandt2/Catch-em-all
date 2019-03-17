@@ -1,4 +1,3 @@
-const Ball = require("./ball");
 const HandleInput = require("./input");
 
 const GAMESTATE = {
@@ -22,7 +21,7 @@ class Game {
 
   gameLoop() {
     requestAnimationFrame(this.gameLoop);
-      if (this.gameState === GAMESTATE.PAUSED) {
+      if (this.gameState === GAMESTATE.PAUSED || this.gameState === GAMESTATE.MENU) {
         return;
       };
     this.ctx.clearRect(0, 0, Game.width, Game.height)
@@ -36,11 +35,31 @@ class Game {
     this.ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
     this.ctx.rect(0, 0, Game.width, Game.height);
     this.ctx.fill();
+    this.ctx.font = "30px Arial";
+    this.ctx.fillStyle = "white";
+    this.ctx.textAlign = "center";
+    this.ctx.fillText("Paused", Game.width/2, Game.height/2);
+  }
+
+  drawStart(){
+    this.ctx.fillStyle = "rgba(0, 0, 0, 1)";
+    this.ctx.rect(0, 0, Game.width, Game.height);
+    this.ctx.fill();
+    this.ctx.font = "30px Arial";
+    this.ctx.fillStyle = "white";
+    this.ctx.textAlign = "center";
+    this.ctx.fillText("Press SPACEBAR to begin", Game.width/2, Game.height/2);
   }
 
   gameStart(){
-    this.gameState = GAMESTATE.RUNNING;
+    this.drawStart();
     this.gameLoop();
+  }
+
+  beginGame(){
+    if(this.gameState === GAMESTATE.MENU) {
+      this.gameState = GAMESTATE.RUNNING;
+    }
   }
 
   togglePause(){
