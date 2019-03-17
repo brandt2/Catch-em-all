@@ -12,6 +12,7 @@ class Ball {
     this.brick = params.brick;
   }
 
+  // draws the ball
   drawBall(ctx) {
     ctx.fillStyle = this.color;
     ctx.beginPath();
@@ -47,6 +48,7 @@ class Ball {
     
     // resets the ball position if ball position is greater than the game height
     if (this.pos[1] + this.radius > Game.height) {
+      Game.lives -= 1;
       this.ballReset();
     }
     
@@ -59,6 +61,7 @@ class Ball {
     this.pos[1] += BALL_SPEEDY;
   }
 
+  // resets ball position to the center of the map
   ballReset(){
     this.pos[0] = Game.width/2;
     this.pos[1] = Game.height/2;

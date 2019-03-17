@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     brick: brick
   });
 
-    
+  // new game
   let newGame = new Game(ctx, ball, paddle, brick);
   newGame.gameStart();
 
