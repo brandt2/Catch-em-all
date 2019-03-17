@@ -10,14 +10,24 @@ class Ball {
     this.color = params.color;
     this.paddle = params.paddle;
     this.brick = params.brick;
+    this.pokeball = params.pokeball;
   }
 
   // draws the ball
   drawBall(ctx) {
-    ctx.fillStyle = this.color;
+    ctx.fillStyle = "white";
     ctx.beginPath();
     ctx.arc(this.pos[0], this.pos[1], this.radius, 0, 2 * Math.PI, true);
     ctx.fill();
+    ctx.fillStyle = "red";
+    ctx.beginPath();
+    ctx.arc(this.pos[0], this.pos[1], this.radius, 0, 1 * Math.PI, true);
+    ctx.fill();
+    ctx.fillStyle = "black";
+    ctx.beginPath();
+    ctx.arc(this.pos[0], this.pos[1], 2, 0, 2 * Math.PI, true);
+    ctx.fill();
+
   };
 
   move() {
