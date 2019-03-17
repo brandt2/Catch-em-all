@@ -15,7 +15,7 @@ class Ball {
 
   // draws the ball
   drawBall(ctx) {
-    ctx.fillStyle = "white";
+    ctx.fillStyle = "lightgray";
     ctx.beginPath();
     ctx.arc(this.pos[0], this.pos[1], this.radius, 0, 2 * Math.PI, true);
     ctx.fill();
