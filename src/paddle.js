@@ -5,7 +5,7 @@ class Paddle {
     this.paddleX = 400,
     this.paddleThickness = 10;
     this.paddleHeight = 680;
-    this.paddleWidth = 100;
+    this.paddleWidth = 125;
 
     this.mouseMoveHandler = this.mouseMoveHandler.bind(this);
     this.canvasEl.addEventListener("mousemove", this.mouseMoveHandler);

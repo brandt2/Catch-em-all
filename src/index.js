@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // new paddle
   let paddle = new Paddle({
-    color: "red",
+    color: "rgb(66, 104, 173)",
     canvasEl: canvasEl
   });
   

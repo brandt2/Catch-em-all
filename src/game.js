@@ -58,7 +58,8 @@ class Game {
     this.ctx.fillStyle = "white";
     this.ctx.textAlign = "center";
     this.ctx.fillText("You have 5 lives", Game.width/2, Game.height/2 - 50);
-    this.ctx.fillText("Press SPACEBAR to begin", Game.width/2, Game.height/2);
+    this.ctx.fillText("Are you ready to catch 'em all?", Game.width/2, Game.height/2);
+    this.ctx.fillText("Press SPACEBAR to begin", Game.width / 2, Game.height / 2 + 50);
   }
 
   // draws the gameover screen
@@ -69,7 +70,7 @@ class Game {
     this.ctx.font = "30px Arial";
     this.ctx.fillStyle = "white";
     this.ctx.textAlign = "center";
-    this.ctx.fillText("GAMEOVER", Game.width/2, Game.height/2);
+    this.ctx.fillText("Nice try, but you're not a pokemon master", Game.width/2, Game.height/2);
   }
 
   // begins the game when SPACEBAR is hit
