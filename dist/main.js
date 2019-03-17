@@ -115,7 +115,7 @@ eval("class Brick {\n  constructor(){\n    this.brickWidth = 80;\n    this.brick
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const Ball = __webpack_require__(/*! ./ball */ \"./src/ball.js\");\n\nclass Game {\n  constructor(ctx, ball, paddle, brick) {\n    this.ctx = ctx;\n    this.ball = ball;\n    this.paddle = paddle;\n    this.brick = brick;\n\n    this.gameLoop = this.gameLoop.bind(this);\n  }\n\n  gameLoop() {\n    requestAnimationFrame(this.gameLoop);\n    this.ctx.clearRect(0, 0, Game.width, Game.height)\n    this.ball.drawBall(this.ctx);\n    this.brick.drawBricks(this.ctx);\n    this.paddle.drawPaddle(this.ctx);\n    this.ball.move();\n  }\n\n}\n\nGame.height = 600;\nGame.width = 800;\nGame.style = \"background: black\";\nmodule.exports = Game;\n\n//# sourceURL=webpack:///./src/game.js?");
+eval("const Ball = __webpack_require__(/*! ./ball */ \"./src/ball.js\");\nconst HandleInput = __webpack_require__(/*! ./input */ \"./src/input.js\");\n\nconst GAMESTATE = {\n  PAUSED: 0,\n  RUNNING: 1,\n  MENU: 2,\n  GAMEOVER: 3\n}\n\nclass Game {\n  constructor(ctx, ball, paddle, brick) {\n    this.ctx = ctx;\n    this.ball = ball;\n    this.paddle = paddle;\n    this.brick = brick;\n    this.gameState = GAMESTATE.MENU;\n\n    this.gameLoop = this.gameLoop.bind(this);\n    new HandleInput(this);\n  }\n\n  gameLoop() {\n    requestAnimationFrame(this.gameLoop);\n      if (this.gameState === GAMESTATE.PAUSED) {\n        return;\n      };\n    this.ctx.clearRect(0, 0, Game.width, Game.height)\n    this.ball.drawBall(this.ctx);\n    this.brick.drawBricks(this.ctx);\n    this.paddle.drawPaddle(this.ctx);\n    this.ball.move();\n  }\n\n  drawPause(){\n    this.ctx.fillStyle = \"rgba(0, 0, 0, 0.5)\";\n    this.ctx.rect(0, 0, Game.width, Game.height);\n    this.ctx.fill();\n  }\n\n  gameStart(){\n    this.gameState = GAMESTATE.RUNNING;\n    this.gameLoop();\n  }\n\n  togglePause(){\n    if(this.gameState === GAMESTATE.PAUSED) {\n      this.gameState = GAMESTATE.RUNNING;\n    } else {\n      this.gameState = GAMESTATE.PAUSED;\n      this.drawPause();\n    }\n  }\n\n}\n\nGame.height = 600;\nGame.width = 800;\nGame.style = \"background: black\";\nmodule.exports = Game;\n\n//# sourceURL=webpack:///./src/game.js?");
 
 /***/ }),
 
@@ -127,6 +127,17 @@ eval("const Ball = __webpack_require__(/*! ./ball */ \"./src/ball.js\");\n\nclas
 /***/ (function(module, exports, __webpack_require__) {
 
 eval("const Ball = __webpack_require__(/*! ./ball */ \"./src/ball.js\");\nconst Game = __webpack_require__(/*! ./game */ \"./src/game.js\");\nconst Paddle = __webpack_require__(/*! ./paddle */ \"./src/paddle.js\");\nconst Brick = __webpack_require__(/*! ./brick */ \"./src/brick.js\");\n\ndocument.addEventListener(\"DOMContentLoaded\", () => {\n  const canvasEl = document.getElementById(\"game-canvas\");\n  const ctx = canvasEl.getContext(\"2d\");\n  \n  canvasEl.width = Game.width;\n  canvasEl.height = Game.height;\n  canvasEl.style = Game.style;\n\n  // new paddle\n  let paddle = new Paddle({\n    color: \"red\",\n    canvasEl: canvasEl\n  });\n  \n  // new brick\n  let brick = new Brick();\n  brick.resetBricks();\n \n  // new ball\n  let ball = new Ball({ \n    pos: [400, 300],\n    radius: 10,\n    color: \"aqua\",\n    paddle: paddle,\n    brick: brick\n  });\n\n    \n  let newGame = new Game(ctx, ball, paddle, brick);\n  newGame.gameLoop();\n\n  console.log(\"Webpack is working!\")\n})\n\n//# sourceURL=webpack:///./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/input.js":
+/*!**********************!*\
+  !*** ./src/input.js ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("class HandleInput {\n  constructor(game) {\n    document.addEventListener(\"keydown\", (evt) => {\n      switch(evt.keyCode){\n        case 83:\n          alert(\"start game\");\n          break;\n        case 80:\n          game.togglePause();\n          break;\n      }\n    })\n  }\n}\n\nmodule.exports = HandleInput;\n\n//# sourceURL=webpack:///./src/input.js?");
 
 /***/ }),
 
