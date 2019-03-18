@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const canvasEl = document.getElementById("game-canvas");
   const ctx = canvasEl.getContext("2d");
   const pokemon = document.getElementById("pokemon");
+  const pokemon2 = document.getElementById("pokemon2");
   
   canvasEl.width = Game.width;
   canvasEl.height = Game.height;
@@ -32,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // new game
-  let newGame = new Game(ctx, ball, paddle, brick);
+  let newGame = new Game(ctx, ball, paddle, brick, pokemon2);
   newGame.gameStart();
 
   console.log("Webpack is working!")
