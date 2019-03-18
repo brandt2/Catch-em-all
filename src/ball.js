@@ -1,7 +1,7 @@
 const Game = require("./game");
 
 let BALL_SPEEDX = 1;
-let BALL_SPEEDY = 6;
+let BALL_SPEEDY = 5;
 
 class Ball {
   constructor(params){
@@ -10,14 +10,24 @@ class Ball {
     this.color = params.color;
     this.paddle = params.paddle;
     this.brick = params.brick;
+    this.pokeball = params.pokeball;
   }
 
   // draws the ball
   drawBall(ctx) {
-    ctx.fillStyle = this.color;
+    ctx.fillStyle = "lightgray";
     ctx.beginPath();
     ctx.arc(this.pos[0], this.pos[1], this.radius, 0, 2 * Math.PI, true);
     ctx.fill();
+    ctx.fillStyle = "red";
+    ctx.beginPath();
+    ctx.arc(this.pos[0], this.pos[1], this.radius, 0, 1 * Math.PI, true);
+    ctx.fill();
+    ctx.fillStyle = "black";
+    ctx.beginPath();
+    ctx.arc(this.pos[0], this.pos[1], 2, 0, 2 * Math.PI, true);
+    ctx.fill();
+
   };
 
   move() {
@@ -64,7 +74,7 @@ class Ball {
   // resets ball position to the center of the map
   ballReset(){
     this.pos[0] = Game.width/2;
-    this.pos[1] = Game.height/2;
+    this.pos[1] = Game.height/2 + 50;
   }
 
 }

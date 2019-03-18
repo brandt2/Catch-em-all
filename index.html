@@ -2,10 +2,33 @@
 <html lang="en">
 <head>
   <link rel="stylesheet" href="./dist/styles.css">
-  <title>Brick Breaker</title>
-</head>
-<body>
-  <canvas id="game-canvas"></canvas>
   <script src="./dist/main.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+  <title>Catch'em All</title>
+</head>
+<body class="background">
+  <img id="pokemon" src="./pokemon1.png" style="display: none">
+  <img id="pokemon2" src="./pokeback2.jpg" style="display: none">
+  <div class="overall-game">
+    <h1 class="title">
+      <img src="https://fontmeme.com/permalink/190318/20db11d3795f0996ada3ed5092898180.png">
+    </h1>
+    <div class="instructions">
+      <div class="instructions-inner-div">
+        <h2>Instructions</h2>
+        <ol class="list">
+          <li>Press SPACEBAR to start the game</li>
+          <li>Press 'p' to pause the game</li>
+          <li>Move the mouse to control the paddle</li>
+          <li>Refresh the page to restart</li>
+          <li>Enjoy the game</li>
+        </ol>
+      </div>
+      <div class="pikachu"></div>
+    </div>
+    <div class="the-game">
+      <canvas id="game-canvas"></canvas>
+    </div>
+  </div>
 </body>
 </html>

@@ -1,10 +1,11 @@
 class Brick {
-  constructor(){
-    this.brickWidth = 80;
-    this.brickThickness = 20;
-    this.gap = 5;
+  constructor(pokemon){
+    this.brickWidth = 53.3;
+    this.brickThickness = 36.5;
+    this.gap = 2;
     this.brickRows = 10;
-    this.brickCols = 10;
+    this.brickCols = 15;
+    this.pokemon = pokemon;
     this.brickGrid = new Array(this.brickRows * this.brickCols);
 
     this.drawBrick = this.drawBrick.bind(this);
@@ -46,14 +47,15 @@ class Brick {
 
   // draw one brick
   drawBrick(ctx, left, top){
-    ctx.fillStyle = "yellow";
-    ctx.fillRect(left, top, this.brickWidth - this.gap, this.brickThickness - this.gap);
+    // ctx.fillStyle = "yellow";
+    // ctx.fillRect(left, top, this.brickWidth - this.gap, this.brickThickness - this.gap);
+    ctx.drawImage(this.pokemon, left, top, 53.3, 36.5, left, top, 50, 30)
   }
 
   // draw all the bricks by looping
   drawBricks(ctx) {
     for (let i = 0; i < this.brickCols; i++) {
-      for(let j = 1; j < this.brickRows; j++) {
+      for(let j = 0; j < this.brickRows; j++) {
         if (this.isBrickAtTileCoord(i, j)) {
           let brickLeftEdgeX = i * this.brickWidth;
           let brickTopEdgeY = j * this.brickThickness;
