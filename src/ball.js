@@ -63,6 +63,7 @@ class Ball {
     }
     
     if (this.brick.checkForAndRemoveBrickAtPixelCoord(this.pos[0], this.pos[1])) {
+      Game.bricks -= 1;
       BALL_SPEEDY *= -1;
     };
 

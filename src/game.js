@@ -26,6 +26,10 @@ class Game {
       this.gameState = GAMESTATE.GAMEOVER;
       this.drawGameOver();
     }
+    if (Game.bricks === 0) {
+      this.drawWin();
+      return;
+    }
     requestAnimationFrame(this.gameLoop);
       if (this.gameState === GAMESTATE.PAUSED || 
         this.gameState === GAMESTATE.MENU || 
@@ -55,7 +59,7 @@ class Game {
     this.ctx.font = "40px Arial";
     this.ctx.fillStyle = "rgb(63, 107, 183)";
     this.ctx.textAlign = "center";
-    this.ctx.fillText("You have 8 tries", Game.width/2, Game.height/2 - 50);
+    this.ctx.fillText("You have 5 tries", Game.width/2, Game.height/2 - 50);
     this.ctx.fillText("Are you ready to catch 'em all?", Game.width/2, Game.height/2);
     this.ctx.fillText("Press SPACEBAR to begin", Game.width / 2, Game.height / 2 + 50);
     this.ctx.drawImage(this.pokemon2, Game.width, Game.height);
@@ -69,6 +73,15 @@ class Game {
     this.ctx.fillStyle = "black";
     this.ctx.textAlign = "center";
     this.ctx.fillText("Nice try, but you're not a pokemon master", Game.width/2, Game.height/2);
+  }
+ 
+  drawWin(){
+    this.ctx.drawImage(this.pokemon2, Game.width, Game.height);
+    this.ctx.fill();
+    this.ctx.font = "40px Arial";
+    this.ctx.fillStyle = "black";
+    this.ctx.textAlign = "center";
+    this.ctx.fillText("Congratulations! You're a Pokemon Master!", Game.width/2, Game.height/2);
   }
 
   // begins the game when SPACEBAR is hit
@@ -98,6 +111,7 @@ class Game {
 
 Game.height = 680;
 Game.width = 800;
-Game.lives = 8;
+Game.lives = 5;
+Game.bricks = 150;
 Game.style = "border: 1px solid black";
 module.exports = Game;

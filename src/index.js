@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const ctx = canvasEl.getContext("2d");
   const pokemon = document.getElementById("pokemon");
   const pokemon2 = document.getElementById("pokemon2");
+  const pokemon3 = document.getElementById("pokemon3");
   
   canvasEl.width = Game.width;
   canvasEl.height = Game.height;
