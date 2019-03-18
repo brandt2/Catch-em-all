@@ -60,7 +60,6 @@ class Brick {
           let brickLeftEdgeX = i * this.brickWidth;
           let brickTopEdgeY = j * this.brickThickness;
           this.drawBrick(ctx, brickLeftEdgeX, brickTopEdgeY)
-
         }
       }
     }
