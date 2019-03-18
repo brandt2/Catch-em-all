@@ -54,10 +54,10 @@ class Game {
     this.ctx.fillStyle = "rgba(0, 0, 0, 1)";
     this.ctx.rect(0, 0, Game.width, Game.height);
     this.ctx.fill();
-    this.ctx.font = "30px Arial";
+    this.ctx.font = "40px Arial";
     this.ctx.fillStyle = "white";
     this.ctx.textAlign = "center";
-    this.ctx.fillText("You have 5 lives", Game.width/2, Game.height/2 - 50);
+    this.ctx.fillText("You have 5 tries", Game.width/2, Game.height/2 - 50);
     this.ctx.fillText("Are you ready to catch 'em all?", Game.width/2, Game.height/2);
     this.ctx.fillText("Press SPACEBAR to begin", Game.width / 2, Game.height / 2 + 50);
   }
@@ -98,7 +98,7 @@ class Game {
 
 }
 
-Game.height = 720;
+Game.height = 680;
 Game.width = 800;
 Game.lives = 5;
 Game.style = "border: 1px solid black";
