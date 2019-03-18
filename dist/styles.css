@@ -1,6 +1,6 @@
 #game-canvas {
   cursor: crosshair;
-  background-image: url("../pokeback2.jpg");
+  background-image: url("../images/pokeback2.jpg");
   background-size: cover;
   width: 100%;
   height: 100vh;
@@ -9,7 +9,7 @@
 }
 
 .background {
-  background-image: url("../pokeback.png");
+  background-image: url("../images/pokeback.png");
   background-size: cover;
   width: 100%;
   background-repeat: no-repeat;
@@ -40,7 +40,7 @@
 
 .pikachu {
   background-position: center;
-  background-image: url("../pikachu2.png");
+  background-image: url("../images/pikachu2.png");
   background-size: cover;
   height: 250px;
   width: 220px;
