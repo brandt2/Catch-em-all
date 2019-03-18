@@ -1,6 +1,7 @@
 # Catch'em All
 
 [Live Demo](https://brandt2.github.io/Catch-em-all/)
+![Instructions](https://github.com/brandt2/Catch-em-all/blob/master/images/instructions.png)
 
 ### Overview
 Catch'em All is a game that is a clone of brick breaker. The main goal of the game is to bounce the ball off the paddle to break all the bricks. For this clone the theme is based off of pokemon. There are 150 bricks with the picture of the first 150 pokemon on them and the ball is a pokeball. The user can bounce the pokeball of the paddle to capture the pokemon. Once all 150 pokemon have been captured the player becomes a pokemon master.
@@ -21,6 +22,7 @@ In the game, the player can:
 
 ### Interesting Code Parts
 The game runs by continuously calling the draw methods inside the `gameloop()` method. This `gameloop()` draws the ball, bricks, and paddle after it erases everything. By clearing the canvas before redrawing everything the previous location of the items would not be shown. The `gameloop()` also has additional logic built in it that will pause the game and display a pause screen when 'p' is pressed, display the gameover page if the player loses too many lives, and display the winning page if all the bricks were hit.
+![Gameplay](https://github.com/brandt2/Catch-em-all/blob/master/images/pokemon_gif.gif)
 ```js
 gameLoop() {
     if (Game.lives === 0 ) {
@@ -45,6 +47,7 @@ gameLoop() {
   }
   ```
 In addition to the `gameloop()` method. Another piece of code that I am proud of are the `drawBricks()` and `drawBrick()` methods. The `drawBricks()` method uses a nested for loop in order to create the location of all the bricks and calls the `drawBrick()` method to create each individual brick at that location. The `drawBrick()` method takes in the arguments given to it be `drawBricks()` and uses it to select the appropriate pokemon from the sprite sheet to create a brick with the correct image in it.
+![All of the Pokemon](https://github.com/brandt2/Catch-em-all/blob/master/images/all_the_pokemon.png)
 ```js
   drawBrick(ctx, left, top){
     ctx.drawImage(this.pokemon, left, top, 53.3, 36.5, left, top, 50, 30)
