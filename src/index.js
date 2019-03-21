@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // new ball
   let ball = new Ball({ 
     pos: [400, 400],
-    radius: 10,
+    radius: 13,
     color: "aqua",
     paddle: paddle,
     brick: brick

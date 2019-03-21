@@ -25,7 +25,7 @@ class Ball {
     ctx.fill();
     ctx.fillStyle = "black";
     ctx.beginPath();
-    ctx.arc(this.pos[0], this.pos[1], 2, 0, 2 * Math.PI, true);
+    ctx.arc(this.pos[0], this.pos[1], 3, 0, 2 * Math.PI, true);
     ctx.fill();
 
   };
@@ -76,6 +76,8 @@ class Ball {
   ballReset(){
     this.pos[0] = Game.width/2;
     this.pos[1] = Game.height/2 + 50;
+    BALL_SPEEDX = 1;
+    BALL_SPEEDY = 5;
   }
 
 }
