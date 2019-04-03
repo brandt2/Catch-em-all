@@ -72,10 +72,14 @@ a, ul, li {
   justify-content: center;
 }
 
-.footer-links > h1 {
-  font-size: 48px;
+.footer-links > a {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  margin: 0 20px 0 20px;
 }
 
-.linkedin {
-  margin-right: 60px;
+.footer-links i {
+  margin-right: 10px;
+  font-size: 32px;
 }
